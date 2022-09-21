@@ -44,6 +44,8 @@ namespace BookStore.API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(options => options.WithOrigins(
+"http://localhost:58158").AllowAnyMethod().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {

@@ -13,7 +13,6 @@ namespace BookStoreMVC.Controllers
 {
     public class BookController : Controller
     {
-            HttpClient httpClient = new HttpClient();
         // GET: BookController
         public async Task<IActionResult> Index()
         {
@@ -32,18 +31,20 @@ namespace BookStoreMVC.Controllers
             //        //reservationList = JsonConvert.DeserializeObject<List<Reservation>>(apiResponse);
 
             //}
-            string Baseurl = "http://localhost:24552/";
-            httpClient.BaseAddress = new Uri(Baseurl);
-            httpClient.DefaultRequestHeaders.Clear();
-            //Define request data format
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //string Baseurl = "http://localhost:24552";
+            //httpClient.BaseAddress = new Uri(Baseurl);
+            //httpClient.DefaultRequestHeaders.Clear();
+            ////Define request data format
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             //var response = await httpClient.GetStringAsync("http://localhost:24552/api/Books");
-            HttpResponseMessage Res = await httpClient.GetAsync("/GetAllBooks");
+            //HttpResponseMessage Res = await httpClient.GetAsync(Baseurl+ "/api/Books");
 
             //httpClient.BaseAddress = new Uri("http://localhost:24552/api/");
             //HTTP GET
-            var responseTask = httpClient.GetAsync("Books");
+            HttpClient httpClient = new HttpClient();
+
+            var responseTask = httpClient.GetAsync("http://localhost:24552/api/Books");
             responseTask.Wait();
 
             var result = responseTask.Result;
@@ -81,11 +82,11 @@ namespace BookStoreMVC.Controllers
         // GET: BookController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            httpClient.BaseAddress = new Uri("http://localhost:24552/");
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //GET Method
-            HttpResponseMessage response = await httpClient.GetAsync("api/Books/1");
+            //httpClient.BaseAddress = new Uri("http://localhost:24552/");
+            //httpClient.DefaultRequestHeaders.Accept.Clear();
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            ////GET Method
+            //HttpResponseMessage response = await httpClient.GetAsync("api/Books/1");
 
             return View();
         }
